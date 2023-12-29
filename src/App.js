@@ -1,4 +1,4 @@
-import logo from './logo.svg';
+// import logo from './logo.svg';
 // import './css/App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 // import Button from 'react-bootstrap/Button';
@@ -7,9 +7,12 @@ import Container from 'react-bootstrap/Container';
 // import Nav from 'react-bootstrap/Nav';
 // import Navbar from 'react-bootstrap/Navbar';
 // import NavDropdown from 'react-bootstrap/NavDropdown';
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import CustomNavbar from './components/NavBar';
 import CustomHome from './components/Home';
-
+import CustomUsers from './components/UserPage';
+import CreateBlog from './components/CreateBlog';
+import BlogDetails from './components/BlogDetails';
 
 
 
@@ -25,83 +28,79 @@ import CustomHome from './components/Home';
  * our component uses.
  */
 
-const user = {
-  name: "Jane Doe",
-  imgUrl: "https://i.imgur.com/yXOvdOSs.jpg",
-  imgSize: 90
-};
-
 function App() {
   return (
-      <Content/>
-  );
-}
-
-function Content() {
-  return (
-    <div className="App">
-      <Container>
-        <CustomNavbar />
-        <div className="content">
-            <CustomHome/>
-        </div>
-      </Container>
-    </div>
+    <BrowserRouter>
+      <div className="App">
+        <Container>
+          <CustomNavbar />
+          <div className="content">
+              <Routes>
+                <Route path="/Home"/>
+                <Route path="/Blogs" element={<CustomHome/>} />
+                <Route path="/List-Of-Users" element={<CustomUsers/>} />
+                <Route path="/Create-new-blog" element={<CreateBlog/>} />
+                <Route path="/Blogs/:id" element={<BlogDetails/>}/>
+              </Routes>
+          </div>
+        </Container>
+      </div>
+    </BrowserRouter>
   );
 }
 
 /**
  * Profile function
  */
-function Profile() {
-  return (
-    <div>
-      <img
-        className="avatar"
-        src={user.imgUrl}
-        alt={"Photo of " + user.name}
-        style={{
-          width: user.imgSize,
-          height: user.imgSize
-        }}
-      />
-      <h1>{user.name}</h1>
-    </div>
-  );
-}
+// function Profile() {
+//   return (
+//     <div>
+//       <img
+//         className="avatar"
+//         src={user.imgUrl}
+//         alt={"Photo of " + user.name}
+//         style={{
+//           width: user.imgSize,
+//           height: user.imgSize
+//         }}
+//       />
+//       <h1>{user.name}</h1>
+//     </div>
+//   );
+// }
 
-function InfoList() {
-  return (
-    <div>
-      <ul>
-        <li>Invent new traffic lights</li>
-        <li>Rehearse a movie scene</li>
-        <li>Improve the spectrum technology</li>
-      </ul>
-    </div>
-  );
-}
+// function InfoList() {
+//   return (
+//     <div>
+//       <ul>
+//         <li>Invent new traffic lights</li>
+//         <li>Rehearse a movie scene</li>
+//         <li>Improve the spectrum technology</li>
+//       </ul>
+//     </div>
+//   );
+// }
 
-function Header(){
-  return (
-    <header className="App-header">
-      <img src={logo} className="App-logo" alt="logo" />
-      <Profile />
-      <InfoList />
-      {/* <p>
-        Edit <code>src/App.js</code> and save to reload.
-      </p> */}
-      {/* <a
-        className="App-link"
-        href="https://reactjs.org"
-        target="_blank"
-        rel="noopener noreferrer"
-      >
-        Learn React
-      </a> */}
-    </header>
-  );
-}
+// function Header(){
+//   return (
+//     <header className="App-header">
+//       <img src={logo} className="App-logo" alt="logo" />
+//       <Profile />
+//       <InfoList />
+//       {/* <p>
+//         Edit <code>src/App.js</code> and save to reload.
+//       </p> */}
+//       {/* <a
+//         className="App-link"
+//         href="https://reactjs.org"
+//         target="_blank"
+//         rel="noopener noreferrer"
+//       >
+//         Learn React
+//       </a> */}
+//     </header>
+//   );
+// }
 
 // function NavScrollExample() {
 //   return (

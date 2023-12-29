@@ -1,0 +1,52 @@
+{
+  "blogs": [
+    {
+      "id": 1,
+      "title": "My first blog",
+      "body": "First blog content...",
+      "author": "Mario"
+    },
+    {
+      "id": 2,
+      "title": "My second blog",
+      "body": "Second blog content...",
+      "author": "Luigi"
+    },
+    {
+      "id": 3,
+      "title": "My new website",
+      "body": "lorem ipsum...",
+      "author": "Mario"
+    },
+    {
+      "id": 4,
+      "title": "The Witcher",
+      "body": "lorem ipsum...",
+      "author": "Luigi"
+    },
+    {
+      "id": 5,
+      "title": "About Cats and Dogs",
+      "body": "lorem ipsum...",
+      "author": "Caramel"
+    },
+    {
+      "id": 6,
+      "title": "My second website",
+      "body": "lorem ipsum...",
+      "author": "Mario"
+    },
+    {
+      "title": "asdas",
+      "body": "dadasda",
+      "author": "yoshi",
+      "id": 7
+    },
+    {
+      "title": "My 8th Blog",
+      "body": "HAHAHAHAHA",
+      "author": "yoshi",
+      "id": 8
+    }
+  ]
+}

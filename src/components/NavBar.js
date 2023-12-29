@@ -1,3 +1,5 @@
+import { NavLink } from "react-router-dom";
+
 /**
  * Note: by using the simple react snippit package.
  * code: enter "SFC" then enter tab.
@@ -6,10 +8,13 @@
 const NavBar = () => {
     return ( 
         <nav className="navbar">
-            <h1>My Blog</h1>
+            <NavLink to="/Home"><h1>BLOGGER</h1></NavLink>
             <div className="links">
-                <a href="/">Home</a>
-                <a href="/create" style={{color: "white", backgroundColor: "#f1356d", borderRadius: "8px"}}>New Blog</a>
+                <NavLink to="/Blogs">BLOGS</NavLink>
+                <NavLink to="/List-Of-Users">LIST OF USERS</NavLink>
+                <NavLink to="/Create-new-blog" style={{color: "white", backgroundColor: "#f1356d", borderRadius: "8px"}}>NEW BLOG</NavLink>
+                {/* <a href="/">Home</a>
+                <a href="/create" style={{color: "white", backgroundColor: "#f1356d", borderRadius: "8px"}}>New Blog</a> */}
             </div>
         </nav>
     );
