@@ -1,0 +1,27 @@
+The choice between using AbortController/AbortSignal and the cleanup function approach depends on the specific needs and requirements of your application. 
+Both approaches are valid, and the decision often comes down to the complexity of your asynchronous operations and the level of control you need over cancellations.
+
+Here are some considerations to help you decide:
+
+Using AbortController/AbortSignal:
+Pros:
+
+Granular control: AbortController provides fine-grained control over asynchronous operations. You can initiate and cancel specific requests individually.
+Built-in support: Some APIs, like the fetch API, natively support cancellation using AbortController.
+Cons:
+
+Complexity: Implementing AbortController may add some complexity to your code, especially if you have multiple asynchronous operations that need to be coordinated.
+Using Cleanup Function:
+Pros:
+
+Simplicity: The cleanup function approach is often simpler and straightforward for basic use cases.
+Consistency: It is a common pattern in React, and many developers are familiar with this approach.
+Cons:
+
+Limited control: If you have multiple asynchronous operations and you want to cancel them individually, the cleanup function approach might be less granular compared to AbortController.
+Recommendation:
+Simple Use Cases: If your application involves straightforward asynchronous operations, and you don't need fine-grained control over cancellations, the cleanup function approach is simple and sufficient.
+
+Complex Use Cases: If your application involves multiple asynchronous operations that need coordinated cancellation or if you are working with APIs that support AbortController, using AbortController can provide more control and flexibility.
+
+In many cases, the cleanup function approach is sufficient and is widely used across React applications. It's a good starting point, and you can always switch to AbortController if your application's requirements evolve and demand more fine-grained control over asynchronous operations.
