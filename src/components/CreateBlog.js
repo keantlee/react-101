@@ -1,60 +1,107 @@
 import { useState } from "react";
+import CustomFormValidation from "./CustomFormValidation";
+import Swal from 'sweetalert2';
 
 function AddNewBlogForm(){
-    const [title, setTitle]         = useState('');
-    const [body, setBody]           = useState('');
-    const [author, setAuthor]       = useState('');
-    const [isPending, setIsPending] = useState(false);
+    const initialInputValues = {
+        title: "",
+        body: "",
+        author: ""
+    }
+
+    const [inputvalues, setInputValues] = useState(initialInputValues);
+
+    const [errors, setErrors]      = useState({});
+    const [isSubmit, setIsSubmit]  = useState(false);
 
     // e = means event
 
-    const handleSubmit = (e) => {
+    const handleChange = (e) => {
+        const {name, value} = e.target;
+        setInputValues({ ...inputvalues, [name]: value });
+    }
+
+    const handleSubmit = async (e) => {
         e.preventDefault();
-        const blog = {title, body, author}
-        // console.log(blog);
 
-        setIsPending(true);
+        const { errors, errorCount } = CustomFormValidation(inputvalues);
+        
+        setIsSubmit(true);
+        
+        if(errorCount === 0){
+            setIsSubmit(false);
 
-        fetch('http://localhost:3001/blogs', {
-            method: 'POST',
-            headers: {"Content-Type": "application/json"},
-            body: JSON.stringify(blog)
-        }).then(()=>{
-            console.log('New blog added');
-            setIsPending(false);
-        });
+            try {
+                const res = await fetch('http://localhost:3001/blogs', {
+                    method: 'POST', 
+                    headers: {'Content-Type':'application/json'},
+                    body: JSON.stringify(inputvalues)
+                })
+
+                if(!res.ok){
+                    throw Error('Could not fetch the data from resources');
+                }else{
+                    await res.json();
+                    setIsSubmit(false);
+    
+                    Swal.fire({
+                        icon: 'success',
+                        // title: '',
+                        text: 'SAVED!',
+                    });
+
+                    setInputValues(initialInputValues);
+                }
+            } catch (err) {
+                setIsSubmit(false);
+                Swal.fire({
+                    icon: 'error',
+                    title: 'ERROR',
+                    text: err.message,
+                });
+            }
+        }else{
+            setIsSubmit(false);
+            setErrors(errors)
+        }
     }
 
     return (
         <div>
+            {/* <pre>{JSON.stringify(inputvalues)}</pre> */}
            <form onSubmit={handleSubmit}>
                 <label>Title:</label>
                 <input type="text" 
-                    value={title}
-                    onChange={e => setTitle(e.target.value)} 
-                    required
+                    name="title"
+                    value={inputvalues.title}
+                    onChange={handleChange} 
                 />
-                
+                {errors.title && <p style={{color: "red"}}>{errors.title}</p>}
+
                 <label>Content:</label>
                 <textarea 
                     rows="" 
                     cols="" 
-                    value={body}
-                    onChange={e => setBody(e.target.value)} 
-                    required>
+                    name="body"
+                    value={inputvalues.body}
+                    onChange={handleChange}>
                 </textarea>
+                {errors.body && <p style={{color: "red"}}>{errors.body}</p>}
 
                 <label>Author:</label>
                 <select
-                    value={author}
-                    onChange={e => setAuthor(e.target.value)}
+                    name="author"
+                    value={inputvalues.author}
+                    onChange={handleChange}
                 >
+                    <option value="">-- Select author --</option>
                     <option value="mario">mario</option>
                     <option value="yoshi">yoshi</option>
                 </select>
-                
-               { !isPending && <button>ADD</button> }
-               { isPending && <button disabled>Adding blog...</button> }
+                {errors.author && <p style={{color: "red"}}>{errors.author}</p>}
+
+                { !isSubmit && <button>ADD</button> }
+                { isSubmit && <button disabled>Adding blog...</button> }
 
                 {/* <p>{ title }</p>
                 <p>{ content }</p>

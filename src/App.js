@@ -13,6 +13,7 @@ import CustomHome from './components/Home';
 import CustomUsers from './components/UserPage';
 import CreateBlog from './components/CreateBlog';
 import BlogDetails from './components/BlogDetails';
+import NotFound from './components/NotFound';
 
 
 
@@ -41,6 +42,7 @@ function App() {
                 <Route path="/List-Of-Users" element={<CustomUsers/>} />
                 <Route path="/Create-new-blog" element={<CreateBlog/>} />
                 <Route path="/Blogs/:id" element={<BlogDetails/>}/>
+                <Route path="*" element={<NotFound/>}></Route>
               </Routes>
           </div>
         </Container>

@@ -68,6 +68,7 @@ const useFetchData = (url) => {
                     setIsPending(false);
                 }
             } catch (err) {
+                // Handle errors or display them to the user
                 setIsPending(false);
                 Swal.fire({
                     icon: 'error',
